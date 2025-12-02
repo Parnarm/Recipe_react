@@ -1,0 +1,67 @@
+import { useState } from "react"
+
+export default function Recipe()
+{
+    const [recipename,setRecipeName]=useState("");
+    const [ingredients,setIngredients]=useState("");
+    const [instruction,setInstruction]=useState("");
+    const [recipes,setrecipes]=useState("");
+
+    //save recipes to localstorage
+    const saveRecipes=(updateRecipes)=>{
+        localStorage.setItem("recipes",JSON.stringify(updateRecipes));
+        setrecipes(updateRecipes);
+    }
+    //load recipes
+
+    //add recipes
+    const handleSubmit=(e)=>{
+        e.preventDefault();
+        if(!recipename || !ingredients||!instruction0)
+        {
+            alert("Please fill all fields");
+            return;
+        }
+        else
+        {
+            const newRecipe={
+                id:Date.now(),
+                name:recipename,
+                ingredients,
+                instruction
+            }
+            saveRecipes([...recipes,newRecipe]);
+        }
+        setRecipeName("");
+        setIngredients("");
+        setInstruction("");
+    }
+    return(
+        <>
+        <div style={{maxWidth:"600px",margin:"20px auto",border:"1px solid #ccc",padding:"30px"}}>
+            <h1 style={{marginBottom:"20px",border:"1px solid #ccc",padding:"20px"}}>Recipe Book</h1>
+        <from>      
+        <div style={{marginBottom:"10px"}}>
+            <label>Name:</label><br />
+            <input type="text" style={{width:"100%",padding:"5px"}} />
+        </div>
+
+       <div style={{marginBottom:"10px"}}>
+            <label>Ingredients:</label><br />
+            <input type="text" style={{width:"100%",padding:"5px"}} />
+        </div>
+
+        <div style={{marginBottom:"10px"}}>
+            <label>Instruction:</label><br />
+            <input type="text" style={{width:"100%",padding:"5px"}} />
+        </div>
+        <button style={{padding:"5px 10px"}} type="submit">
+            Add Recipe
+        </button>
+          </from> 
+        </div>
+
+
+        </>
+    )
+}
